@@ -86,13 +86,19 @@ function activate(context) {
         var text = activeEditor.document.getText();
         var mathes = {}, match;
         while (match = pattern.exec(text)) {
-            var startPos = activeEditor.document.positionAt(match.index);
-            var endPos = activeEditor.document.positionAt(match.index + match[0].length);
+            var matchedValue = match[0];
+            var groupedValue = match[1];    // 是否有分组匹配
+            var offsetStart = 0
+            if (groupedValue) {
+                offsetStart = Math.max(0, matchedValue.indexOf(groupedValue))
+            }
+
+            var startPos = activeEditor.document.positionAt(match.index + offsetStart);
+            var endPos = activeEditor.document.positionAt(match.index + offsetStart + (groupedValue || matchedValue).length);
             var decoration = {
                 range: new vscode.Range(startPos, endPos)
             };
 
-            var matchedValue = match[0];
             if (!isCaseSensitive) {
                 matchedValue = matchedValue.toUpperCase();
             }
