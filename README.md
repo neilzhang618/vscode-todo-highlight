@@ -109,6 +109,20 @@ an example of customizing configuration:
 }
 ```
 
+#### keywordsPattern RegExp Groups example
+
+```json
+{
+    "todohighlight.isCaseSensitive": false,
+    "todohighlight.keywordsPattern": " (todo|fixme) ",
+    "todohighlight.defaultStyle": {
+        "color": "#ffffff",
+        "backgroundColor": "#f06292",
+        "overviewRulerColor": "#f06292"
+    },
+}
+```
+
 ### Commands
 
 This extension contributes the following commands to the Command palette.
